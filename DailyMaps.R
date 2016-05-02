@@ -5,7 +5,6 @@ setwd("/home/pi/Github/rmR_2.0")
 library(dplyr)
 library(lubridate)
 library(leafletR)
-library(httr)
 
 today <- Sys.Date()
 yesterday <- today - 1
@@ -66,15 +65,10 @@ chiAverageForThisTime <- round(mean(averageForThisTime$Events))
 # Now make geojson and save it to ratmaps
 dailyMap_chi <- d %>% 
   select(Latitude, Longitude, date) %>% 
-  filter(!is.na(Latitude)) %>%
   rename(latitude = Latitude, longitude = Longitude)
 
-
-# Convert
-toGeoJSON(dailyMap_chi, "daily_chicago", "tmp/")
-
-# and upload to myjson
-PUT(url = "https://api.myjson.com/bins/3f9uo", body = upload_file("./tmp/daily_chicago.geojson"))
+# Convert and upload to our server
+toGeoJSON(dailyMap_chi, "daily_chicago", "../ratmaps/geo/")
 
 
 
@@ -130,12 +124,8 @@ dailyMap_nyc <- d %>%
   filter(Latitude != "NA") %>%
   rename(latitude = Latitude, longitude = Longitude)
 
-
-# Convert 
-toGeoJSON(dailyMap_nyc, "daily_nyc", "tmp/")
-
-# and upload to myjson
-PUT(url = "https://api.myjson.com/bins/4z7qo", body = upload_file("./tmp/daily_nyc.geojson"))
+# Convert and upload to our server
+toGeoJSON(dailyMap_nyc, "daily_nyc", "../ratmaps/geo/")
 
 
 
@@ -191,12 +181,8 @@ dailyMap_bos <- d %>%
   filter(LATITUDE != "NA") %>%
   rename(latitude = LATITUDE, longitude = LONGITUDE)
 
-
-# Convert 
+# Convert and upload to our server
 toGeoJSON(dailyMap_bos, "daily_boston", "../ratmaps/geo/")
-
-# and upload to myjson
-PUT(url = "https://api.myjson.com/bins/zlzk", body = upload_file("./tmp/daily_boston.geojson"))
 
 
 
@@ -255,4 +241,4 @@ dailyMap_sf <- allData %>%
   select(latitude, longitude, date)
   
 # Convert and upload to our server
-toGeoJSON(dailyMap_sf, "daily_sf", "tmp/")
+toGeoJSON(dailyMap_sf, "daily_sf", "../ratmaps/geo/")
