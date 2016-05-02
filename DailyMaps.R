@@ -74,7 +74,7 @@ dailyMap_chi <- d %>%
 toGeoJSON(dailyMap_chi, "daily_chicago", "tmp/")
 
 # and upload to myjson
-PUT(url = "https://api.myjson.com/bins/3f9uo", body = upload_file"./tmp/daily_chicago.geojson")
+PUT(url = "https://api.myjson.com/bins/3f9uo", body = upload_file("./tmp/daily_chicago.geojson"))
 
 
 
@@ -135,7 +135,7 @@ dailyMap_nyc <- d %>%
 toGeoJSON(dailyMap_nyc, "daily_nyc", "tmp/")
 
 # and upload to myjson
-PUT(url = "https://api.myjson.com/bins/4z7qo", body = upload_file"./tmp/daily_nyc.geojson")
+PUT(url = "https://api.myjson.com/bins/4z7qo", body = upload_file("./tmp/daily_nyc.geojson"))
 
 
 
@@ -196,7 +196,7 @@ dailyMap_bos <- d %>%
 toGeoJSON(dailyMap_bos, "daily_boston", "../ratmaps/geo/")
 
 # and upload to myjson
-PUT(url = "https://api.myjson.com/bins/zlzk", body = upload_file"./tmp/daily_boston.geojson")
+PUT(url = "https://api.myjson.com/bins/zlzk", body = upload_file("./tmp/daily_boston.geojson"))
 
 
 
