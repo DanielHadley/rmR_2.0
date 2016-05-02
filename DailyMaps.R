@@ -64,7 +64,8 @@ chiAverageForThisTime <- round(mean(averageForThisTime$Events))
 
 # Now make geojson and save it to ratmaps
 dailyMap_chi <- d %>% 
-  select(Latitude, Longitude, date) %>% 
+  select(Latitude, Longitude, date) %>%
+  filter(!is.na(Latitude)) %>% 
   rename(latitude = Latitude, longitude = Longitude)
 
 # Convert and upload to our server
